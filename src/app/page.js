@@ -1,200 +1,100 @@
-'use client';
+import Image from 'next/image';;
+import 'bootstrap/dist/css/bootstrap.css';
+import Todo from './components/Todo';
+import anfIcon from './anficon.png';
 
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Example() {
+export default function Home() {
   return (
-    <>
-      {/*
-        This example requires updating your template:
+    <main className="mx-auto pt-3" style={{'max-width': '800px'}}>
+      <div className="card mw-100">
+        <div className="card-header p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <Image src={anfIcon} height={50} alt="A"/>
+                <h5 className="m-0 ps-2">Azure NetApp Files Performance Calculator</h5>
+            </div>
+            <div>
+              <div className="input-group">
+              <select input className="form-select">
+                              <option value="Central US">Central US</option>
+                              <option value="East US" selected>East US</option>
+                              <option value="East US 2">East US 2</option>
+                              <option value="North Central US">North Central US</option>
+                              <option value="South Central US">South Central US</option>
+                              <option value="West US">West US</option>
+                              <option value="West US 2">West US 2</option>
+                              <option value="West US 3">West US 3</option>
+                              <option value="US Gov Arizona">US Gov Arizona</option>
+                              <option value="US Gov Virginia">US Gov Virginia</option>
+                              <option value="US Gov Texas">US Gov Texas</option>
+                              <option value="UK South">UK South</option>
+                              <option value="UK West">UK West</option>
 
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
-      <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
-          {({ open }) => (
-            <>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
-                      />
-                    </div>
-                    <div className="hidden md:block">
-                      <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className={classNames(
-                              item.current
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'rounded-md px-3 py-2 text-sm font-medium'
-                            )}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                            {item.name}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="hidden md:block">
-                    <div className="ml-4 flex items-center md:ml-6">
-                      <button
-                        type="button"
-                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
+                              <option value="UAE Central">UAE Central</option>
+                              <option value="UAE North">UAE North</option>
 
-                      {/* Profile dropdown */}
-                      <Menu as="div" className="relative ml-3">
-                        <div>
-                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
-                          </Menu.Button>
-                        </div>
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map((item) => (
-                              <Menu.Item key={item.name}>
-                                {({ active }) => (
-                                  <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
-                                )}
-                              </Menu.Item>
-                            ))}
-                          </Menu.Items>
-                        </Transition>
-                      </Menu>
-                    </div>
-                  </div>
-                  <div className="-mr-2 flex md:hidden">
-                    {/* Mobile menu button */}
-                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open main menu</span>
-                      {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                      ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                      )}
-                    </Disclosure.Button>
-                  </div>
-                </div>
+                              <option value="Switzerland North">Switzerland North</option>
+                              <option value="Switzerland West">Switzerland West</option>
+
+                              <option value="Sweden Central">Sweden Central</option>
+
+                              <option value="Qatar Central">Qatar Central</option>
+
+                              <option value="Norway East">Norway East</option>
+                              <option value="Norway West">Norway West</option>
+
+                              <option value="Korea Central">Korea Central</option>
+
+                              <option value="Japan East">Japan East</option>
+                              <option value="Japan West">Japan West</option>
+
+                              <option value="Central India">Central India</option>
+                              <option value="South India">South India</option>
+
+                              <option value="Germany North">Germany North</option>
+                              <option value="Germany West Central">Germany West Central</option>
+
+                              <option value="France Central">France Central</option>
+
+                              <option value="North Europe">North Europe</option>
+                              <option value="West Europe">West Europe</option>
+
+                              <option value="Canada Central">Canada Central</option>
+                              <option value="Canada East">Canada East</option>
+
+                              <option value="Brazil South">Brazil South</option>
+
+                              <option value="Australia Central">Australia Central</option>
+                              <option value="Australia Central 2">Australia Central 2</option>
+                              <option value="Australia East">Australia East</option>
+                              <option value="Australia Southeast">Australia Southeast</option>
+                              
+                              <option value="East Asia">East Asia</option>
+                              <option value="Southeast Asia">Southeast Asia</option>
+                              <option value="South Africa North">South Africa North</option>
+              </select>
               </div>
-
-              <Disclosure.Panel className="md:hidden">
-                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {navigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="a"
-                      href={item.href}
-                      className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'block rounded-md px-3 py-2 text-base font-medium'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
-                </div>
-                <div className="border-t border-gray-700 pb-3 pt-4">
-                  <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
-                    </div>
-                    <button
-                      type="button"
-                      className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                  </div>
-                  <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
-                  </div>
-                </div>
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
-
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard Sean</h1>
+            </div>
           </div>
-        </header>
-        <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{/* Your content */}</div>
-        </main>
+        </div>
+        <div className="card-body">
+          <small id="volumeWarning" className="form-text text-muted">Minimum volume size is 100 GiB. Maximum volume size is 500 TiB.</small>
+          <div className="input-group mb-3">
+            <span className="my-1 input-group-text">Volume Size</span>
+            <input type="text" className="my-1 mr-sm-1 form-control" placeholder="" value="10" aria-label="Volume Size" aria-describedby="Volume Size" id="capinput" />
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked />
+            <label className="my-1 btn btn-outline-primary" for="btnradio1">GiB</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
+            <label className="my-1 btn btn-outline-primary" for="btnradio2">TiB</label>
+          </div>
+        </div>
+        <div className="card-footer">
+          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
       </div>
-    </>
+      <div className="float-end">
+            <small className="text-muted">&copy;Copyright 2023, <a href="https://netapp.com">NetApp</a></small>
+      </div>
+    </main>
   )
 }
